@@ -4,7 +4,7 @@ using FluentValidation;
 namespace CleanSoftware.Domain.Services
 {
     public class DomainValidationService<TValidatable> : AbstractValidator<TValidatable>
-        where TValidatable : Validatable
+        where TValidatable : DomainValidatable
     {
         public DomainValidationService()
         {

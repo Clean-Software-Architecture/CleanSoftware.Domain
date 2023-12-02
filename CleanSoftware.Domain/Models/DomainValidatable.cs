@@ -1,27 +1,28 @@
-﻿using CleanSoftware.Domain.Services;
+﻿using CleanSoftware.Domain.Interfaces;
+using CleanSoftware.Domain.Services;
 using FluentValidation;
 using FluentValidation.Internal;
 using FluentValidation.Results;
 
 namespace CleanSoftware.Domain.Models
 {
-    public abstract class Validatable
+    public abstract class DomainValidatable : IValidatable
     {
         private readonly ValidatorFactoryService<IValidator> _validatorFactory;
 
-        protected Validatable(ValidatorFactoryService<IValidator> validatorFactory)
+        protected DomainValidatable(ValidatorFactoryService<IValidator> validatorFactory)
         {
             _validatorFactory = validatorFactory;
         }
 
-        protected Validatable()
+        protected DomainValidatable()
         {
             _validatorFactory = CreateDefault;
         }
 
         protected void Validate()
         {
-            var context = new ValidationContext<Validatable>(this);
+            var context = new ValidationContext<DomainValidatable>(this);
 
             var validator = _validatorFactory.Invoke();
             var result = validator.Validate(context);
@@ -36,7 +37,7 @@ namespace CleanSoftware.Domain.Models
                 throw new ArgumentException(nameof(name));
             }
 
-            var context = new ValidationContext<Validatable>(
+            var context = new ValidationContext<DomainValidatable>(
                 this,
                 new PropertyChain(),
                 new MemberNameValidatorSelector(new[] { name }));
@@ -57,7 +58,7 @@ namespace CleanSoftware.Domain.Models
 
         private IValidator CreateDefault()
         {
-            return new DomainValidationService<Validatable>();
+            return new DomainValidationService<DomainValidatable>();
         }
     }
 }
