@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/Clean-Software-Architecture</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Clean-Software-Architecture/CleanSoftware.Domain</RepositoryUrl>
+    <PackageTags>"Clean Architecture", ddd, domain-driven-design, clean-architecture, clean, architecture, SOLID, c#, dotnet</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <Description>CleanSoftware.Domain is a robust C# library designed to streamline and enhance the implementation of Domain-Driven Design (DDD) principles in software development. This library provides a set of powerful tools and abstractions to facilitate the modeling of complex business domains, making it easier for developers to create maintainable, scalable, and well-structured applications.</Description>
+    <Title>Clean Architecture Domain Layer Framework </Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ardalis.SmartEnum" Version="7.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.8.1" />
+  </ItemGroup>
+
+</Project>
