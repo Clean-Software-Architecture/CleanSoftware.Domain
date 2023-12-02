@@ -1,5 +1,7 @@
 # CleanSoftware.Domain
 
+[CleanSoftware.Domain NuGet Package](https://www.nuget.org/packages/CleanSoftware.Domain/)
+
 CleanSoftware.Domain is a robust C# library designed to streamline and enhance the implementation of Domain-Driven Design (DDD) principles in software development. This library provides a set of powerful tools and abstractions to facilitate the modeling of complex business domains, making it easier for developers to create maintainable, scalable, and well-structured applications.
 
 ## Key Features
