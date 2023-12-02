@@ -2,10 +2,10 @@
 
 namespace CleanSoftware.Domain.Models
 {
-    public abstract class DomainEvent<TIDomainEventsContainable> : IDomainEvent
-        where TIDomainEventsContainable : IDomainEventsContainable
+    public abstract class DomainEvent<TOrigin> : IDomainEvent
+        where TOrigin : IAggregate
     {
-        protected DomainEvent(TIDomainEventsContainable origin)
+        protected DomainEvent(TOrigin origin)
         {
             Id = Guid.NewGuid();
             Origin = origin;
@@ -13,6 +13,6 @@ namespace CleanSoftware.Domain.Models
 
         public Guid Id { get; }
 
-        public TIDomainEventsContainable Origin { get; }
+        public TOrigin Origin { get; }
     }
 }
