@@ -1,4 +1,5 @@
 ﻿using CleanSoftware.Domain.Interfaces;
+using CleanSoftware.Domain.Services;
 using FluentValidation;
 
 namespace CleanSoftware.Domain.Models
@@ -9,18 +10,18 @@ namespace CleanSoftware.Domain.Models
         private readonly List<IDomainEvent> _domainEvents = new List<IDomainEvent>();
 
         protected Aggregate(
-            Func<TIdentifier> identifierFactory,
-            Func<IValidator> validatorFactory)
+            IdentifierFactoryService<TIdentifier> identifierFactory,
+            ValidatorFactoryService<IValidator> validatorFactory)
             : base(identifierFactory, validatorFactory)
         {
         }
 
-        protected Aggregate(Func<IValidator> validatorFactory)
+        protected Aggregate(ValidatorFactoryService<IValidator> validatorFactory)
             : base(validatorFactory)
         {
         }
 
-        protected Aggregate(Func<TIdentifier> identifierFactory)
+        protected Aggregate(IdentifierFactoryService<TIdentifier> identifierFactory)
             : base(identifierFactory)
         {
         }

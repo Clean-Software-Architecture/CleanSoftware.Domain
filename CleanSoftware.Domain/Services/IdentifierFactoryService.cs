@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CleanSoftware.Domain.Services
+﻿namespace CleanSoftware.Domain.Services
 {
-    internal class IdentifierFactoryService
-    {
-    }
+    public delegate TIdentifier IdentifierFactoryService<TIdentifier>()
+         where TIdentifier : notnull;
 }

@@ -1,42 +1,38 @@
 ﻿using CleanSoftware.Domain.Interfaces;
+using CleanSoftware.Domain.Services;
 using FluentValidation;
 
 namespace CleanSoftware.Domain.Models
 {
-    public abstract class Entity<TIdentifier> : Validatable, IIdentifiable<TIdentifier>, IDomainEventsContainable
+    public abstract class Entity<TIdentifier> : Validatable, IIdentifiable<TIdentifier>
         where TIdentifier : notnull
     {
-        private readonly List<IDomainEvent> _domainEvents;
         private TIdentifier _id;
 
         protected Entity(
-            Func<TIdentifier> identifierFactory,
-            Func<IValidator> validatorFactory)
+            IdentifierFactoryService<TIdentifier> identifierFactory,
+            ValidatorFactoryService<IValidator> validatorFactory)
                 : this(validatorFactory)
         {
             ArgumentNullException.ThrowIfNull(identifierFactory);
-
             Id = identifierFactory();
         }
 
-        protected Entity(Func<TIdentifier> identifierFactory)
+        protected Entity(IdentifierFactoryService<TIdentifier> identifierFactory)
             : this()
         {
             ArgumentNullException.ThrowIfNull(identifierFactory);
-
             Id = identifierFactory();
         }
 
-        protected Entity(Func<IValidator> validatorFactory)
+        protected Entity(ValidatorFactoryService<IValidator> validatorFactory)
             : base(validatorFactory)
         {
-            _domainEvents = new List<IDomainEvent>();
         }
 
         protected Entity()
             : base()
         {
-            _domainEvents = new List<IDomainEvent>();
         }
 
         public TIdentifier Id
@@ -47,18 +43,6 @@ namespace CleanSoftware.Domain.Models
                 _id = value;
                 ValidateProperty(nameof(Id));
             }
-        }
-
-        public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents;
-
-        protected void AddDomainEvent(IDomainEvent eventItem)
-        {
-            _domainEvents.Add(eventItem);
-        }
-
-        protected void RemoveDomainEvent(IDomainEvent eventItem)
-        {
-            _domainEvents.Remove(eventItem);
         }
     }
 }

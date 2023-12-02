@@ -1,5 +1,4 @@
-﻿using Domain.Models;
-using Domain.Services;
+﻿using CleanSoftware.Domain.Services;
 using FluentValidation;
 using FluentValidation.Internal;
 using FluentValidation.Results;
@@ -8,9 +7,9 @@ namespace CleanSoftware.Domain.Models
 {
     public abstract class Validatable
     {
-        private readonly Func<IValidator> _validatorFactory;
+        private readonly ValidatorFactoryService<IValidator> _validatorFactory;
 
-        protected Validatable(Func<IValidator> validatorFactory)
+        protected Validatable(ValidatorFactoryService<IValidator> validatorFactory)
         {
             _validatorFactory = validatorFactory;
         }
