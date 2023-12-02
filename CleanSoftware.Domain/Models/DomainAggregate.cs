@@ -4,29 +4,29 @@ using FluentValidation;
 
 namespace CleanSoftware.Domain.Models
 {
-    public abstract class Aggregate<TIdentifier> : Entity<TIdentifier>, IAggregate<TIdentifier>
+    public abstract class DomainAggregate<TIdentifier> : DomainEntity<TIdentifier>, IAggregate<TIdentifier>
         where TIdentifier : notnull
     {
         private readonly List<IDomainEvent> _domainEvents = new List<IDomainEvent>();
 
-        protected Aggregate(
+        protected DomainAggregate(
             IdentifierFactoryService<TIdentifier> identifierFactory,
             ValidatorFactoryService<IValidator> validatorFactory)
             : base(identifierFactory, validatorFactory)
         {
         }
 
-        protected Aggregate(ValidatorFactoryService<IValidator> validatorFactory)
+        protected DomainAggregate(ValidatorFactoryService<IValidator> validatorFactory)
             : base(validatorFactory)
         {
         }
 
-        protected Aggregate(IdentifierFactoryService<TIdentifier> identifierFactory)
+        protected DomainAggregate(IdentifierFactoryService<TIdentifier> identifierFactory)
             : base(identifierFactory)
         {
         }
 
-        protected Aggregate()
+        protected DomainAggregate()
             : base()
         {
         }

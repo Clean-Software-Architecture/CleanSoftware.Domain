@@ -4,12 +4,12 @@ using FluentValidation;
 
 namespace CleanSoftware.Domain.Models
 {
-    public abstract class Entity<TIdentifier> : Validatable, IIdentifiable<TIdentifier>
+    public abstract class DomainEntity<TIdentifier> : DomainValidatable, IEntity<TIdentifier> 
         where TIdentifier : notnull
     {
         private TIdentifier _id;
 
-        protected Entity(
+        protected DomainEntity(
             IdentifierFactoryService<TIdentifier> identifierFactory,
             ValidatorFactoryService<IValidator> validatorFactory)
                 : this(validatorFactory)
@@ -18,19 +18,19 @@ namespace CleanSoftware.Domain.Models
             Id = identifierFactory();
         }
 
-        protected Entity(IdentifierFactoryService<TIdentifier> identifierFactory)
+        protected DomainEntity(IdentifierFactoryService<TIdentifier> identifierFactory)
             : this()
         {
             ArgumentNullException.ThrowIfNull(identifierFactory);
             Id = identifierFactory();
         }
 
-        protected Entity(ValidatorFactoryService<IValidator> validatorFactory)
+        protected DomainEntity(ValidatorFactoryService<IValidator> validatorFactory)
             : base(validatorFactory)
         {
         }
 
-        protected Entity()
+        protected DomainEntity()
             : base()
         {
         }

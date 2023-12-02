@@ -12,11 +12,18 @@
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <Description>CleanSoftware.Domain is a robust C# library designed to streamline and enhance the implementation of Domain-Driven Design (DDD) principles in software development. This library provides a set of powerful tools and abstractions to facilitate the modeling of complex business domains, making it easier for developers to create maintainable, scalable, and well-structured applications.</Description>
     <Title>Clean Architecture Domain Layer Framework </Title>
+    <Version>$(VersionPrefix)</Version>
+    <AssemblyVersion></AssemblyVersion>
+    <FileVersion></FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Ardalis.SmartEnum" Version="7.0.0" />
     <PackageReference Include="FluentValidation" Version="11.8.1" />
+    <PackageReference Include="MinVer" Version="4.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
