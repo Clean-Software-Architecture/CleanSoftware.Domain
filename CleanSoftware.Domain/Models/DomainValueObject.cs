@@ -1,17 +1,18 @@
-﻿using CleanSoftware.Domain.Services;
+﻿using CleanSoftware.Domain.Interfaces;
+using CleanSoftware.Domain.Services;
 using FluentValidation;
 
 namespace CleanSoftware.Domain.Models
 {
     // Source: https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/implement-value-objects
-    public abstract class ValueObject : Validatable
+    public abstract class DomainValueObject : DomainValidatable, IValueObject
     {
-        protected ValueObject(ValidatorFactoryService<IValidator> validatorFactory)
+        protected DomainValueObject(ValidatorFactoryService<IValidator> validatorFactory)
             : base(validatorFactory)
         {
         }
 
-        protected ValueObject()
+        protected DomainValueObject()
             : base()
         {
         }
@@ -23,7 +24,7 @@ namespace CleanSoftware.Domain.Models
                 return false;
             }
 
-            var other = (ValueObject)obj;
+            var other = (DomainValueObject)obj;
 
             return GetAtomicValues().SequenceEqual(other.GetAtomicValues());
         }
@@ -35,22 +36,22 @@ namespace CleanSoftware.Domain.Models
                 .Aggregate((x, y) => x ^ y);
         }
 
-        public ValueObject GetCopy()
+        public DomainValueObject GetCopy()
         {
-            return MemberwiseClone() as ValueObject;
+            return MemberwiseClone() as DomainValueObject;
         }
 
-        public static bool operator ==(ValueObject one, ValueObject two)
+        public static bool operator ==(DomainValueObject one, DomainValueObject two)
         {
             return EqualOperator(one, two);
         }
 
-        public static bool operator !=(ValueObject one, ValueObject two)
+        public static bool operator !=(DomainValueObject one, DomainValueObject two)
         {
             return NotEqualOperator(one, two);
         }
 
-        protected static bool EqualOperator(ValueObject left, ValueObject right)
+        protected static bool EqualOperator(DomainValueObject left, DomainValueObject right)
         {
             if (ReferenceEquals(left, null) ^ ReferenceEquals(right, null))
             {
@@ -60,7 +61,7 @@ namespace CleanSoftware.Domain.Models
             return ReferenceEquals(left, null) || left.Equals(right);
         }
 
-        protected static bool NotEqualOperator(ValueObject left, ValueObject right)
+        protected static bool NotEqualOperator(DomainValueObject left, DomainValueObject right)
         {
             return !EqualOperator(left, right);
         }

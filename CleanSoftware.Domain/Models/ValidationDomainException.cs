@@ -3,7 +3,7 @@ using System.Text;
 
 namespace CleanSoftware.Domain.Models
 {
-    public class ValidationDomainException : Exception
+    public class ValidationDomainException : DomainException
     {
         private readonly Lazy<List<ValidationFailure>> _failures;
 
